@@ -135,10 +135,10 @@ container.addEventListener("click", (e) => {
         game.switchPlayer()
     }
     if (game.active().name === "player1") {
-        console.log(playGame(e.target.dataset.row, e.target.dataset.column, "X"))
+        console.log(playGame(e.target.dataset.row, e.target.dataset.column, "O"))
     }
     else {
-        console.log(playGame(e.target.dataset.row, e.target.dataset.column, "O"))
+        console.log(playGame(e.target.dataset.row, e.target.dataset.column, "X"))
     }
     e.target.textContent = gameboard[e.target.dataset.row][e.target.dataset.column]
 
