@@ -26,48 +26,7 @@ function playGame(row, column, input) {
 }
 
 
-  if (
-        // Rows
-        (gameboard[0][0] !== " " &&
-            gameboard[0][0] === gameboard[0][1] &&
-            gameboard[0][1] === gameboard[0][2]) ||
-
-        (gameboard[1][0] !== " " &&
-            gameboard[1][0] === gameboard[1][1] &&
-            gameboard[1][1] === gameboard[1][2]) ||
-
-        (gameboard[2][0] !== " " &&
-            gameboard[2][0] === gameboard[2][1] &&
-            gameboard[2][1] === gameboard[2][2]) ||
-
-        // Columns
-        (gameboard[0][0] !== " " &&
-            gameboard[0][0] === gameboard[1][0] &&
-            gameboard[1][0] === gameboard[2][0]) ||
-
-        (gameboard[0][1] !== " " &&
-            gameboard[0][1] === gameboard[1][1] &&
-            gameboard[1][1] === gameboard[2][1]) ||
-
-        (gameboard[0][2] !== " " &&
-            gameboard[0][2] === gameboard[1][2] &&
-            gameboard[1][2] === gameboard[2][2]) ||
-
-        // Diagonals
-        (gameboard[0][0] !== " " &&
-            gameboard[0][0] === gameboard[1][1] &&
-            gameboard[1][1] === gameboard[2][2]) ||
-
-        (gameboard[0][2] !== " " &&
-            gameboard[0][2] === gameboard[1][1] &&
-            gameboard[1][1] === gameboard[2][0])
-    ) {
-        console.log("You won");
-    } else {
-        console.log("No winner yet");
-    }
-
-
+ 
 console.log(gameboard);
 
 //Creation of basic structure using DOM
