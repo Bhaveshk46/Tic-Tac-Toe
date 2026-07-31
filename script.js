@@ -27,15 +27,48 @@ function playGame(row, column, input) {
 
 //Logic for results
 function result() {
-    if ((gameboard[0][0] === gameboard[1][1] && gameboard[1][1] === gameboard[2][2]) || (gameboard[0][2] === gameboard[1][1] && gameboard[1][1] === gameboard[2][0]) || (gameboard[1][0] === gameboard[1][1] && gameboard[1][1] === gameboard[1][2]) || (gameboard[0][1] === gameboard[1][1] && gameboard[1][1] === gameboard[2][1])) {
+  if (
+        // Rows
+        (gameboard[0][0] !== " " &&
+            gameboard[0][0] === gameboard[0][1] &&
+            gameboard[0][1] === gameboard[0][2]) ||
 
+        (gameboard[1][0] !== " " &&
+            gameboard[1][0] === gameboard[1][1] &&
+            gameboard[1][1] === gameboard[1][2]) ||
+
+        (gameboard[2][0] !== " " &&
+            gameboard[2][0] === gameboard[2][1] &&
+            gameboard[2][1] === gameboard[2][2]) ||
+
+        // Columns
+        (gameboard[0][0] !== " " &&
+            gameboard[0][0] === gameboard[1][0] &&
+            gameboard[1][0] === gameboard[2][0]) ||
+
+        (gameboard[0][1] !== " " &&
+            gameboard[0][1] === gameboard[1][1] &&
+            gameboard[1][1] === gameboard[2][1]) ||
+
+        (gameboard[0][2] !== " " &&
+            gameboard[0][2] === gameboard[1][2] &&
+            gameboard[1][2] === gameboard[2][2]) ||
+
+        // Diagonals
+        (gameboard[0][0] !== " " &&
+            gameboard[0][0] === gameboard[1][1] &&
+            gameboard[1][1] === gameboard[2][2]) ||
+
+        (gameboard[0][2] !== " " &&
+            gameboard[0][2] === gameboard[1][1] &&
+            gameboard[1][1] === gameboard[2][0])
+    ) {
         console.log("You won");
-    }
-
-    else {
-        console.log("tie");
+    } else {
+        console.log("No winner yet");
     }
 }
+
 console.log(gameboard);
 result();
 
@@ -135,10 +168,10 @@ container.addEventListener("click", (e) => {
         game.switchPlayer()
     }
     if (game.active().name === "player1") {
-        console.log(playGame(e.target.dataset.row, e.target.dataset.column, "O"))
+        playGame(e.target.dataset.row, e.target.dataset.column, "O")
     }
     else {
-        console.log(playGame(e.target.dataset.row, e.target.dataset.column, "X"))
+        playGame(e.target.dataset.row, e.target.dataset.column, "X")
     }
     e.target.textContent = gameboard[e.target.dataset.row][e.target.dataset.column]
 
