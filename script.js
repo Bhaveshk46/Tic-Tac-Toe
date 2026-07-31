@@ -13,9 +13,16 @@ console.log(gameboard);
 //Inputs
 function playGame(row, column, input) {
     function process() {
-        gameboard[row][column] = input;
+        if (gameboard[row][column] === " ") {
+            gameboard[row][column] = input;
+        }
+        else {
+            console.log("cant fill");
+        }
     }
-    process();
+    process()
+    console.log(gameboard)
+
 }
 
 //Logic for results
@@ -29,9 +36,6 @@ function result() {
         console.log("tie");
     }
 }
-playGame(0, 0, "X");
-playGame(1, 1, "X");
-playGame(2, 2, "X");
 console.log(gameboard);
 result();
 
@@ -114,19 +118,28 @@ function gameController() {
         activePlayer = activePlayer === player[0] ? player[1] : player[0]
         return activePlayer
     }
-    return switchPlayer;
+
+    function active() {
+        return activePlayer
+    }
+    return {
+        switchPlayer,
+        active,
+    };
 
 }
 
 const game = gameController();
 container.addEventListener("click", (e) => {
-    console.log(game())
-    if (game.activePlayer === "player1") {
-        playGame(e.target.dataset.row, e.target.dataset.column, "X")
+    if (gameboard[e.target.dataset.row][e.target.dataset.column] === " ") {
+        game.switchPlayer()
+    }
+    if (game.active().name === "player1") {
+        console.log(playGame(e.target.dataset.row, e.target.dataset.column, "X"))
     }
     else {
-        playGame(e.target.dataset.row, e.target.dataset.column, "O")
+        console.log(playGame(e.target.dataset.row, e.target.dataset.column, "O"))
     }
-
+    e.target.textContent = gameboard[e.target.dataset.row][e.target.dataset.column]
 
 });
