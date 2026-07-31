@@ -73,3 +73,19 @@ container.appendChild(button7)
 container.appendChild(button8)
 container.appendChild(button9)
 
+function gameController(){
+    player1="p1";
+    player2="p2"
+
+    const player = [
+        {
+            name:player1,
+        },
+        {
+            name:player2,
+        }
+    ]
+
+    
+    
+}
