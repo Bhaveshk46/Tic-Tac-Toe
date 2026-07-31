@@ -41,30 +41,39 @@ const container = document.createElement("div")
 body.appendChild(container)
 
 const button1 = document.createElement("button");
+button1.dataset.id = 1
 button1.setAttribute("id", "button1")
 
 const button2 = document.createElement("button");
+button2.dataset.id = 2
 button2.setAttribute("id", "button2")
 
 const button3 = document.createElement("button");
+button3.dataset.id = 3
 button3.setAttribute("id", "button3")
 
 const button4 = document.createElement("button");
+button4.dataset.id = 4
 button4.setAttribute("id", "button4")
 
 const button5 = document.createElement("button");
+button5.dataset.id = 5
 button5.setAttribute("id", "button5")
 
 const button6 = document.createElement("button");
+button6.dataset.id = 6
 button6.setAttribute("id", "button6")
 
 const button7 = document.createElement("button");
+button7.dataset.id = 7
 button7.setAttribute("id", "button7")
 
 const button8 = document.createElement("button");
+button8.dataset.id = 8
 button8.setAttribute("id", "button8")
 
 const button9 = document.createElement("button");
+button9.dataset.id = 9
 button9.setAttribute("id", "button9")
 
 container.appendChild(button1)
@@ -79,18 +88,24 @@ container.appendChild(button9)
 
 //swapping of players
 function gameController() {
-    player1 = "p1";
-    player2 = "p2"
+
 
     const player = [
         {
-            name: player1,
+            name: "player1",
+            sign: "X",
         },
         {
-            name: player2,
+            name: "player2",
+            sign: "O"
         }
     ]
 
+    let activePlayer = player[0];
+    activePlayer = activePlayer === player[0] ? player[1] : player[0];
+    console.log(activePlayer)
+    return activePlayer
 
 
 }
+gameController()
