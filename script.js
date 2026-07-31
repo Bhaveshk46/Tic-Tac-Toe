@@ -103,25 +103,30 @@ function gameController() {
     const player = [
         {
             name: "player1",
-            sign: "X",
         },
         {
             name: "player2",
-            sign: "O"
         }
     ]
 
     let activePlayer = player[0];
-    activePlayer = activePlayer === player[0] ? player[1] : player[0];
-
-    return activePlayer
-
-
+    function switchPlayer() {
+        activePlayer = activePlayer === player[0] ? player[1] : player[0]
+        return activePlayer
+    }
+    return switchPlayer;
 
 }
-console.log(gameController())
-console.log(gameController())
 
+const game = gameController();
 container.addEventListener("click", (e) => {
+    console.log(game())
+    if (game.activePlayer === "player1") {
+        playGame(e.target.dataset.row, e.target.dataset.column, "X")
+    }
+    else {
+        playGame(e.target.dataset.row, e.target.dataset.column, "O")
+    }
+
 
 });
