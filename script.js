@@ -112,9 +112,14 @@ function gameController() {
     function active() {
         return activePlayer
     }
+
+    function resetPlayer(){
+        activePlayer = player[0];
+    }
     return {
         switchPlayer,
         active,
+        resetPlayer,
     };
 
 }
@@ -193,8 +198,9 @@ reset.addEventListener("click", () => {
     }
     gameOver = false;
     const buttons = container.querySelectorAll("button");
-    buttons.forEach(button=>{
-        button.textContent=" ";
+    buttons.forEach(button => {
+        button.textContent = " ";
     })
+    game.resetPlayer();
     console.log(gameboard)
 })
