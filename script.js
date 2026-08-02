@@ -1,6 +1,6 @@
-const gameboard = [];
+let gameboard = [];
 
-//creation of slots for ggame
+//creation of slots for game
 for (let i = 0; i < 3; i++) {
     gameboard[i] = [];
     for (let j = 0; j < 3; j++) {
@@ -174,11 +174,27 @@ container.addEventListener("click", (e) => {
     } else {
         console.log("No winner yet");
     }
-
-
-
-
-
-
-
 });
+const resetDiv = document.createElement("div");
+const reset = document.createElement("button");
+resetDiv.setAttribute("id", "reset");
+body.appendChild(reset);
+reset.textContent = "Reset";
+
+reset.addEventListener("click", () => {
+    gameboard = [];
+
+    //creation of slots for game
+    for (let i = 0; i < 3; i++) {
+        gameboard[i] = [];
+        for (let j = 0; j < 3; j++) {
+            gameboard[i].push(" ");
+        }
+    }
+    gameOver = false;
+    const buttons = container.querySelectorAll("button");
+    buttons.forEach(button=>{
+        button.textContent=" ";
+    })
+    console.log(gameboard)
+})
