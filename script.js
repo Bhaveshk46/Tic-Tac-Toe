@@ -26,7 +26,7 @@ function playGame(row, column, input) {
 }
 
 
- 
+
 console.log(gameboard);
 
 //Creation of basic structure using DOM
@@ -118,9 +118,10 @@ function gameController() {
     };
 
 }
-
+let gameOver = false;
 const game = gameController();
 container.addEventListener("click", (e) => {
+    if (gameOver) return;
     if (gameboard[e.target.dataset.row][e.target.dataset.column] === " ") {
         game.switchPlayer()
     }
@@ -132,7 +133,7 @@ container.addEventListener("click", (e) => {
     }
     e.target.textContent = gameboard[e.target.dataset.row][e.target.dataset.column]
 
-      if (
+    if (
         // Rows
         (gameboard[0][0] !== " " &&
             gameboard[0][0] === gameboard[0][1] &&
@@ -169,9 +170,15 @@ container.addEventListener("click", (e) => {
             gameboard[1][1] === gameboard[2][0])
     ) {
         console.log("You won");
+        gameOver = true;
     } else {
         console.log("No winner yet");
     }
+
+
+
+
+
 
 
 });
