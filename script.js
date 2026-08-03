@@ -113,7 +113,7 @@ function gameController() {
         return activePlayer
     }
 
-    function resetPlayer(){
+    function resetPlayer() {
         activePlayer = player[0];
     }
     return {
@@ -123,7 +123,21 @@ function gameController() {
     };
 
 }
+
+function checkDraw() {
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (gameboard[i][j] === " ") {
+                return false; // At least one empty cell, so not a draw
+            }
+        }
+    }
+
+    return true; // No empty cells found
+}
+
 let gameOver = false;
+let draw = false;
 const game = gameController();
 container.addEventListener("click", (e) => {
     if (gameOver) return;
@@ -177,9 +191,15 @@ container.addEventListener("click", (e) => {
         console.log("You won");
         gameOver = true;
     } else {
-        console.log("No winner yet");
+        console.log("No winner yet")
+
     }
+    if(checkDraw()){
+    console.log("DRAW!")
+    gameOver = true;
+}
 });
+
 const resetDiv = document.createElement("div");
 const reset = document.createElement("button");
 resetDiv.setAttribute("id", "reset");
