@@ -1,33 +1,34 @@
-let gameboard = [];
 
+const Board = {  gameboard : [],
+}
 //creation of slots for game
 for (let i = 0; i < 3; i++) {
-    gameboard[i] = [];
+    Board.gameboard[i] = [];
     for (let j = 0; j < 3; j++) {
-        gameboard[i].push(" ");
+        Board.gameboard[i].push(" ");
     }
 }
 
-console.log(gameboard);
+console.log(Board.gameboard);
 
 //Inputs
 function playGame(row, column, input) {
     function process() {
-        if (gameboard[row][column] === " ") {
-            gameboard[row][column] = input;
+        if (Board.gameboard[row][column] === " ") {
+            Board.gameboard[row][column] = input;
         }
         else {
             console.log("cant fill");
         }
     }
     process()
-    console.log(gameboard)
+    console.log(Board.gameboard)
 
 }
 
 
 
-console.log(gameboard);
+console.log(Board.gameboard);
 
 //Creation of basic structure using DOM
 const body = document.querySelector("body");
@@ -127,7 +128,7 @@ function gameController() {
 function checkDraw() {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-            if (gameboard[i][j] === " ") {
+            if (Board.gameboard[i][j] === " ") {
                 return false; // At least one empty cell, so not a draw
             }
         }
@@ -141,7 +142,7 @@ let draw = false;
 const game = gameController();
 container.addEventListener("click", (e) => {
     if (gameOver) return;
-    if (gameboard[e.target.dataset.row][e.target.dataset.column] === " ") {
+    if (Board.gameboard[e.target.dataset.row][e.target.dataset.column] === " ") {
         game.switchPlayer()
     }
     if (game.active().name === "player1") {
@@ -150,43 +151,43 @@ container.addEventListener("click", (e) => {
     else {
         playGame(e.target.dataset.row, e.target.dataset.column, "X")
     }
-    e.target.textContent = gameboard[e.target.dataset.row][e.target.dataset.column]
+    e.target.textContent = Board.gameboard[e.target.dataset.row][e.target.dataset.column]
 
     if (
         // Rows
-        (gameboard[0][0] !== " " &&
-            gameboard[0][0] === gameboard[0][1] &&
-            gameboard[0][1] === gameboard[0][2]) ||
+        (Board.gameboard[0][0] !== " " &&
+            Board.gameboard[0][0] === Board.gameboard[0][1] &&
+            Board.gameboard[0][1] === Board.gameboard[0][2]) ||
 
-        (gameboard[1][0] !== " " &&
-            gameboard[1][0] === gameboard[1][1] &&
-            gameboard[1][1] === gameboard[1][2]) ||
+        (Board.gameboard[1][0] !== " " &&
+            Board.gameboard[1][0] === Board.gameboard[1][1] &&
+            Board.gameboard[1][1] === Board.gameboard[1][2]) ||
 
-        (gameboard[2][0] !== " " &&
-            gameboard[2][0] === gameboard[2][1] &&
-            gameboard[2][1] === gameboard[2][2]) ||
+        (Board.gameboard[2][0] !== " " &&
+            Board.gameboard[2][0] === Board.gameboard[2][1] &&
+            Board.gameboard[2][1] === Board.gameboard[2][2]) ||
 
         // Columns
-        (gameboard[0][0] !== " " &&
-            gameboard[0][0] === gameboard[1][0] &&
-            gameboard[1][0] === gameboard[2][0]) ||
+        (Board.gameboard[0][0] !== " " &&
+            Board.gameboard[0][0] === Board.gameboard[1][0] &&
+            Board.gameboard[1][0] === Board.gameboard[2][0]) ||
 
-        (gameboard[0][1] !== " " &&
-            gameboard[0][1] === gameboard[1][1] &&
-            gameboard[1][1] === gameboard[2][1]) ||
+        (Board.gameboard[0][1] !== " " &&
+            Board.gameboard[0][1] === Board.gameboard[1][1] &&
+            Board.gameboard[1][1] === Board.gameboard[2][1]) ||
 
-        (gameboard[0][2] !== " " &&
-            gameboard[0][2] === gameboard[1][2] &&
-            gameboard[1][2] === gameboard[2][2]) ||
+        (Board.gameboard[0][2] !== " " &&
+            Board.gameboard[0][2] === Board.gameboard[1][2] &&
+            Board.gameboard[1][2] === Board.gameboard[2][2]) ||
 
         // Diagonals
-        (gameboard[0][0] !== " " &&
-            gameboard[0][0] === gameboard[1][1] &&
-            gameboard[1][1] === gameboard[2][2]) ||
+        (Board.gameboard[0][0] !== " " &&
+            Board.gameboard[0][0] === Board.gameboard[1][1] &&
+            Board.gameboard[1][1] === Board.gameboard[2][2]) ||
 
-        (gameboard[0][2] !== " " &&
-            gameboard[0][2] === gameboard[1][1] &&
-            gameboard[1][1] === gameboard[2][0])
+        (Board.gameboard[0][2] !== " " &&
+            Board.gameboard[0][2] === Board.gameboard[1][1] &&
+            Board.gameboard[1][1] === Board.gameboard[2][0])
     ) {
         console.log("You won");
         gameOver = true;
@@ -194,10 +195,10 @@ container.addEventListener("click", (e) => {
         console.log("No winner yet")
 
     }
-    if(checkDraw()){
-    console.log("DRAW!")
-    gameOver = true;
-}
+    if (checkDraw()) {
+        console.log("DRAW!")
+        gameOver = true;
+    }
 });
 
 const resetDiv = document.createElement("div");
@@ -207,13 +208,13 @@ body.appendChild(reset);
 reset.textContent = "Reset";
 
 reset.addEventListener("click", () => {
-    gameboard = [];
+    Board.gameboard = [];
 
     //creation of slots for game
     for (let i = 0; i < 3; i++) {
-        gameboard[i] = [];
+        Board.gameboard[i] = [];
         for (let j = 0; j < 3; j++) {
-            gameboard[i].push(" ");
+            Board.gameboard[i].push(" ");
         }
     }
     gameOver = false;
@@ -222,5 +223,5 @@ reset.addEventListener("click", () => {
         button.textContent = " ";
     })
     game.resetPlayer();
-    console.log(gameboard)
+    console.log(Board.gameboard)
 })
