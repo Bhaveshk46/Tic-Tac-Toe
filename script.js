@@ -74,8 +74,6 @@ const gameBoard = (() => {
                 board[i].push(" ");
             }
         }
-
-        displayController.resetDisplay();
     }
 
     return {
@@ -199,6 +197,7 @@ displayController.reset.addEventListener("click", () => {
     gameBoard.reset();
     game.resetPlayer();
     gameOver = false;
+    displayController.resetDisplay();
 })
 
 
