@@ -1,34 +1,41 @@
+const gameBoard = (()=>{
+    const board = [];
 
-const Board = {  gameboard : [],
-}
-//creation of slots for game
-for (let i = 0; i < 3; i++) {
-    Board.gameboard[i] = [];
+    //creation of slots for game
+    for(let i = 0; i < 3; i++) {
+    board[i] = [];
     for (let j = 0; j < 3; j++) {
-        Board.gameboard[i].push(" ");
+        board[i].push(" ");
     }
 }
+const getBoard = () =>{
+    return board;
+}
+return {
+    getBoard,
+}
+})();
 
-console.log(Board.gameboard);
+console.log(gameBoard.getBoard());
 
 //Inputs
 function playGame(row, column, input) {
     function process() {
-        if (Board.gameboard[row][column] === " ") {
-            Board.gameboard[row][column] = input;
+        if (gameBoard.getBoard()[row][column] === " ") {
+            gameBoard.getBoard()[row][column] = input;
         }
         else {
             console.log("cant fill");
         }
     }
     process()
-    console.log(Board.gameboard)
+    console.log(gameBoard.getBoard())
 
 }
 
 
 
-console.log(Board.gameboard);
+console.log(gameBoard.getBoard());
 
 //Creation of basic structure using DOM
 const body = document.querySelector("body");
@@ -128,7 +135,7 @@ function gameController() {
 function checkDraw() {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-            if (Board.gameboard[i][j] === " ") {
+            if (gameBoard.getBoard()[i][j] === " ") {
                 return false; // At least one empty cell, so not a draw
             }
         }
@@ -142,7 +149,7 @@ let draw = false;
 const game = gameController();
 container.addEventListener("click", (e) => {
     if (gameOver) return;
-    if (Board.gameboard[e.target.dataset.row][e.target.dataset.column] === " ") {
+    if (gameBoard.getBoard()[e.target.dataset.row][e.target.dataset.column] === " ") {
         game.switchPlayer()
     }
     if (game.active().name === "player1") {
@@ -151,43 +158,43 @@ container.addEventListener("click", (e) => {
     else {
         playGame(e.target.dataset.row, e.target.dataset.column, "X")
     }
-    e.target.textContent = Board.gameboard[e.target.dataset.row][e.target.dataset.column]
+    e.target.textContent = gameBoard.getBoard()[e.target.dataset.row][e.target.dataset.column]
 
     if (
         // Rows
-        (Board.gameboard[0][0] !== " " &&
-            Board.gameboard[0][0] === Board.gameboard[0][1] &&
-            Board.gameboard[0][1] === Board.gameboard[0][2]) ||
+        (gameBoard.getBoard()[0][0] !== " " &&
+            gameBoard.getBoard()[0][0] === gameBoard.getBoard()[0][1] &&
+            gameBoard.getBoard()[0][1] === gameBoard.getBoard()[0][2]) ||
 
-        (Board.gameboard[1][0] !== " " &&
-            Board.gameboard[1][0] === Board.gameboard[1][1] &&
-            Board.gameboard[1][1] === Board.gameboard[1][2]) ||
+        (gameBoard.getBoard()[1][0] !== " " &&
+            gameBoard.getBoard()[1][0] === gameBoard.getBoard()[1][1] &&
+            gameBoard.getBoard()[1][1] === gameBoard.getBoard()[1][2]) ||
 
-        (Board.gameboard[2][0] !== " " &&
-            Board.gameboard[2][0] === Board.gameboard[2][1] &&
-            Board.gameboard[2][1] === Board.gameboard[2][2]) ||
+        (gameBoard.getBoard()[2][0] !== " " &&
+            gameBoard.getBoard()[2][0] === gameBoard.getBoard()[2][1] &&
+            gameBoard.getBoard()[2][1] === gameBoard.getBoard()[2][2]) ||
 
         // Columns
-        (Board.gameboard[0][0] !== " " &&
-            Board.gameboard[0][0] === Board.gameboard[1][0] &&
-            Board.gameboard[1][0] === Board.gameboard[2][0]) ||
+        (gameBoard.getBoard()[0][0] !== " " &&
+            gameBoard.getBoard()[0][0] === gameBoard.getBoard()[1][0] &&
+            gameBoard.getBoard()[1][0] === gameBoard.getBoard()[2][0]) ||
 
-        (Board.gameboard[0][1] !== " " &&
-            Board.gameboard[0][1] === Board.gameboard[1][1] &&
-            Board.gameboard[1][1] === Board.gameboard[2][1]) ||
+        (gameBoard.getBoard()[0][1] !== " " &&
+            gameBoard.getBoard()[0][1] === gameBoard.getBoard()[1][1] &&
+            gameBoard.getBoard()[1][1] === gameBoard.getBoard()[2][1]) ||
 
-        (Board.gameboard[0][2] !== " " &&
-            Board.gameboard[0][2] === Board.gameboard[1][2] &&
-            Board.gameboard[1][2] === Board.gameboard[2][2]) ||
+        (gameBoard.getBoard()[0][2] !== " " &&
+            gameBoard.getBoard()[0][2] === gameBoard.getBoard()[1][2] &&
+            gameBoard.getBoard()[1][2] === gameBoard.getBoard()[2][2]) ||
 
         // Diagonals
-        (Board.gameboard[0][0] !== " " &&
-            Board.gameboard[0][0] === Board.gameboard[1][1] &&
-            Board.gameboard[1][1] === Board.gameboard[2][2]) ||
+        (gameBoard.getBoard()[0][0] !== " " &&
+            gameBoard.getBoard()[0][0] === gameBoard.getBoard()[1][1] &&
+            gameBoard.getBoard()[1][1] === gameBoard.getBoard()[2][2]) ||
 
-        (Board.gameboard[0][2] !== " " &&
-            Board.gameboard[0][2] === Board.gameboard[1][1] &&
-            Board.gameboard[1][1] === Board.gameboard[2][0])
+        (gameBoard.getBoard()[0][2] !== " " &&
+            gameBoard.getBoard()[0][2] === gameBoard.getBoard()[1][1] &&
+            gameBoard.getBoard()[1][1] === gameBoard.getBoard()[2][0])
     ) {
         console.log("You won");
         gameOver = true;
@@ -208,13 +215,13 @@ body.appendChild(reset);
 reset.textContent = "Reset";
 
 reset.addEventListener("click", () => {
-    Board.gameboard = [];
+    gameBoard.getBoard() = [];
 
     //creation of slots for game
     for (let i = 0; i < 3; i++) {
-        Board.gameboard[i] = [];
+        gameBoard.getBoard()[i] = [];
         for (let j = 0; j < 3; j++) {
-            Board.gameboard[i].push(" ");
+            gameBoard.getBoard()[i].push(" ");
         }
     }
     gameOver = false;
@@ -223,5 +230,5 @@ reset.addEventListener("click", () => {
         button.textContent = " ";
     })
     game.resetPlayer();
-    console.log(Board.gameboard)
+    console.log(gameBoard.getBoard())
 })
