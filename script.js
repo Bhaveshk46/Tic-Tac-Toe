@@ -11,31 +11,26 @@ const gameBoard = (()=>{
 const getBoard = () =>{
     return board;
 }
-return {
-    getBoard,
-}
-})();
 
-console.log(gameBoard.getBoard());
-
-//Inputs
-function playGame(row, column, input) {
-    function process() {
-        if (gameBoard.getBoard()[row][column] === " ") {
-            gameBoard.getBoard()[row][column] = input;
+function playGame(row, column, mark) {
+    function placeMark() {
+        if (board[row][column] === " ") {
+            board[row][column] = mark;
         }
         else {
             console.log("cant fill");
         }
     }
-    process()
-    console.log(gameBoard.getBoard())
+
 
 }
 
+return {
+    getBoard,
+    playGame,
+}
+})();
 
-
-console.log(gameBoard.getBoard());
 
 //Creation of basic structure using DOM
 const body = document.querySelector("body");
