@@ -176,7 +176,6 @@ document.getElementById("submit").addEventListener("click", (e) => {
 
 
 let gameOver = false;
-let draw = false;
 let game;
 container.addEventListener("click", (e) => {
     if (!game) return;
