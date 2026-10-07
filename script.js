@@ -3,6 +3,10 @@ const body = document.querySelector("body");
 container.id = "container";
 body.appendChild(container);
 
+
+let player1 = "";
+let player2 = "";
+
 const displayController = (() => {
     const renderBoard = () => {
         // Creation of basic structure using DOM
@@ -20,6 +24,39 @@ const displayController = (() => {
             }
         }
     }
+
+    const label1 = document.createElement("label");
+    label1.textContent = "Player1:";
+    const input1 = document.createElement("input");
+    input1.setAttribute("id", "input1");
+
+    body.appendChild(label1);
+    body.appendChild(input1);
+
+    const label2 = document.createElement("label");
+    label2.textContent = "Player2:";
+    const input2 = document.createElement("input");
+    input2.setAttribute("id", "input2");
+
+    const form = document.createElement("form");
+    form.appendChild(label1);
+    form.appendChild(input1);
+    form.appendChild(label2);
+    form.appendChild(input2);
+    const submit = document.createElement("button");
+    submit.textContent = "Submit";
+    submit.setAttribute("id", "submit")
+    form.appendChild(submit)
+    body.appendChild(form);
+
+
+
+    function playerInput() {
+        const player1 = document.getElementById("input1").value;
+        const player2 = document.getElementById("input2").value;
+        return [player1, player2];
+    }
+
 
     const resetDisplay = () => {
         const buttons = container.querySelectorAll("button");
@@ -40,6 +77,7 @@ const displayController = (() => {
         renderBoard,
         resetDisplay,
         reset,
+        playerInput,
     }
 })();
 
@@ -84,15 +122,15 @@ const gameBoard = (() => {
 })();
 
 //swapping of players
-function gameController() {
+function gameController(player1, player2) {
 
 
     const player = [
         {
-            name: "player1",
+            name: player1,
         },
         {
-            name: "player2",
+            name: player2,
         }
     ]
 
@@ -128,16 +166,23 @@ function checkDraw() {
 
     return true; // No empty cells found
 }
+document.getElementById("submit").addEventListener("click", (e) => {
+    e.preventDefault();
+    [player1, player2] = displayController.playerInput();
+    game = gameController(player1, player2);
+})
+
 
 let gameOver = false;
 let draw = false;
-const game = gameController();
+let game;
 container.addEventListener("click", (e) => {
+    if(!game) return;
     if (gameOver) return;
     if (gameBoard.getBoard()[e.target.dataset.row][e.target.dataset.column] === " ") {
         game.switchPlayer()
     }
-    if (game.active().name === "player1") {
+    if (game.active().name === player1) {
         gameBoard.placeMark(e.target.dataset.row, e.target.dataset.column, "O")
     }
     else {
@@ -181,7 +226,7 @@ container.addEventListener("click", (e) => {
             gameBoard.getBoard()[0][2] === gameBoard.getBoard()[1][1] &&
             gameBoard.getBoard()[1][1] === gameBoard.getBoard()[2][0])
     ) {
-        console.log("You won");
+        console.log(`${player1} won`);
         gameOver = true;
     } else {
         console.log("No winner yet")
@@ -203,3 +248,7 @@ displayController.reset.addEventListener("click", () => {
 
 
 displayController.renderBoard();
+
+
+
+
