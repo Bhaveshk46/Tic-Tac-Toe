@@ -49,7 +49,9 @@ const displayController = (() => {
     form.appendChild(submit)
     body.appendChild(form);
 
-
+    const result = document.createElement("div");
+    result.setAttribute("id", "result");
+    document.body.appendChild(result)
 
     function playerInput() {
         const player1 = document.getElementById("input1").value;
@@ -177,16 +179,19 @@ let gameOver = false;
 let draw = false;
 let game;
 container.addEventListener("click", (e) => {
-    if(!game) return;
+    if (!game) return;
     if (gameOver) return;
-    if (gameBoard.getBoard()[e.target.dataset.row][e.target.dataset.column] === " ") {
-        game.switchPlayer()
+    const row = e.target.dataset.row;
+    const column = e.target.dataset.column;
+
+    if (gameBoard.getBoard()[row][column] !== " ") {
+        return;
     }
     if (game.active().name === player1) {
-        gameBoard.placeMark(e.target.dataset.row, e.target.dataset.column, "O")
+        gameBoard.placeMark(e.target.dataset.row, e.target.dataset.column, "X")
     }
     else {
-        gameBoard.placeMark(e.target.dataset.row, e.target.dataset.column, "X")
+        gameBoard.placeMark(e.target.dataset.row, e.target.dataset.column, "O")
     }
     e.target.textContent = gameBoard.getBoard()[e.target.dataset.row][e.target.dataset.column]
 
@@ -226,16 +231,24 @@ container.addEventListener("click", (e) => {
             gameBoard.getBoard()[0][2] === gameBoard.getBoard()[1][1] &&
             gameBoard.getBoard()[1][1] === gameBoard.getBoard()[2][0])
     ) {
-        console.log(`${player1} won`);
+
+        console.log(`${game.active().name} won`);
+
+        document.getElementById("result").textContent = `Result: ${game.active().name} WON!`
         gameOver = true;
     } else {
         console.log("No winner yet")
 
     }
     if (checkDraw()) {
+        document.getElementById("result").textContent = "Result: DRAW!"
+
+
         console.log("DRAW!")
         gameOver = true;
     }
+    game.switchPlayer();
+
 });
 
 displayController.reset.addEventListener("click", () => {
